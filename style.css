@@ -1,84 +1,144 @@
+/* Using CSS Variables for easy theme changes */
+:root {
+    --background-color: #121212;
+    --container-color: #1e1e1e;
+    --header-color: #242424;
+    --control-color: #2a2a2a;
+    --border-color: #3a3a3a;
+    --text-color: #e0e0e0;
+    --accent-color: #00aaff;
+    --my-message-color: #007bff;
+    --other-message-color: #333333;
+    --error-color: #e53935;
+    --success-color: #43a047;
+    --connecting-color: #fdd835;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: var(--background-color);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
+
 #chat-container {
-    width: 90%;
-    max-width: 600px;
-    height: 90vh;
-    border: 1px solid #333;
-    background-color: #1e1e1e;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    width: 95%;
+    max-width: 700px;
+    height: 95vh;
+    border: 1px solid var(--border-color);
+    background-color: var(--container-color);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     display: flex;
     flex-direction: column;
-    border-radius: 8px;
+    border-radius: 12px;
+    overflow: hidden;
 }
-h2 {
-    text-align: center;
-    padding: 1rem;
-    margin: 0;
-    border-bottom: 1px solid #333;
-    color: #00ff7f;
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+    background-color: var(--header-color);
+    border-bottom: 1px solid var(--border-color);
 }
+
+.chat-header h2 {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+#status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: background-color 0.5s ease;
+}
+.status-disconnected { background-color: var(--error-color); }
+.status-connecting { background-color: var(--connecting-color); }
+.status-connected { background-color: var(--success-color); }
+
 #messages {
     flex-grow: 1;
     overflow-y: auto;
     padding: 1rem;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
+
 .message-wrapper {
     display: flex;
     flex-direction: column;
-    margin-bottom: 0.75rem;
-    max-width: 85%;
+    margin-bottom: 1rem;
+    max-width: 75%;
+    align-self: flex-start; /* Default for others */
 }
+
+.message-wrapper.my-message {
+    align-self: flex-end; /* Align to the right for "my" messages */
+}
+
 .username {
     font-size: 0.8rem;
-    color: #aaa;
-    margin-bottom: 0.2rem;
+    color: #9e9e9e;
+    margin-bottom: 0.25rem;
     padding-left: 10px;
 }
+.my-message .username {
+    text-align: right;
+    padding-right: 10px;
+}
+
 .text {
-    background-color: #333;
-    padding: 0.5rem 1rem;
-    border-radius: 18px;
-    line-height: 1.4;
+    background-color: var(--other-message-color);
+    padding: 0.7rem 1.2rem;
+    border-radius: 20px;
+    line-height: 1.5;
     word-break: break-word;
 }
-.error-message {
-    background-color: #d32f2f !important;
-    font-weight: bold;
+.my-message .text {
+    background-color: var(--my-message-color);
 }
-#controls {
+.error-message .text {
+    background-color: var(--error-color) !important;
+}
+
+.chat-controls {
     display: flex;
     padding: 1rem;
-    border-top: 1px solid #333;
-    gap: 0.5rem;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--control-color);
+    gap: 0.75rem;
 }
-#controls input {
+
+.chat-controls input {
     flex-grow: 1;
-    padding: 0.75rem;
-    border: 1px solid #444;
-    background-color: #2b2b2b;
-    color: #e0e0e0;
+    padding: 0.85rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
     border-radius: 20px;
+    font-size: 1rem;
 }
-#controls button {
-    padding: 0.75rem 1.5rem;
+.chat-controls input#username-input {
+    flex-grow: 0;
+    width: 100px;
+}
+
+#send-button {
+    padding: 0 1.5rem;
     border: none;
-    background-color: #007bff;
+    background-color: var(--accent-color);
     color: white;
     cursor: pointer;
     border-radius: 20px;
     font-weight: bold;
+    transition: background-color 0.2s ease;
 }
-#controls button:hover {
-    background-color: #0056b3;
+#send-button:hover {
+    background-color: #0088cc;
 }
