@@ -2,7 +2,7 @@
 console.log("--- script.js loaded and executing ---");
 
 // ================== THIS IS THE ONLY LINE YOU EVER NEED TO CHANGE ==================
-const API_URL = "https://8fa60ee5f9de.ngrok-free.app";
+const API_URL = "https://poor-flowers-listen.loca.lt";
 // ===================================================================================
 
 // --- ELEMENT GRAB & VALIDATION ---
